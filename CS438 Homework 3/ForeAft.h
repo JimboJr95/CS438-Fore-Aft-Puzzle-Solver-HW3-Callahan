@@ -8,7 +8,6 @@
 #pragma once
 #include <string>
 #include <iostream>
-#include <fstream>
 
 using namespace std;
 
@@ -16,13 +15,13 @@ class ForeAft
 {
 public:
 	// Constructor/Destructor
-	ForeAft(string filename);
+	ForeAft();
 	~ForeAft();
 
 	// Functions
 	void run();
 
 private:
-	bool openFile(string filename, ifstream &infile);
+	bool validNumber(int num, int beginRange, int endRange);
 };
 
