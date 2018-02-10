@@ -6,39 +6,12 @@
 //
 
 #pragma once
+#include "Heap.h"
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
-
-typedef int color;
-
-const color invalid = 99;
-const color red = 1;
-const color blue = 2;
-const color blank = 3;
-
-struct node {
-	// node constructor
-	color **arr;
-	int blankR, blankC;
-
-	node(int boardSize) {
-		arr = new color*[boardSize]; // initialize size of the array
-		blankR = 0;
-		blankC = 0;
-
-		// initialize second dimension of the array
-		for (int i = 0; i < boardSize; i++)
-			arr[i] = new color [boardSize];
-
-		// init array values to invalid
-		for (int i = 0; i < boardSize; i++)
-			for (int j = 0; j < boardSize; j++)
-				arr[i][j] = invalid;
-
-	}
-};
 
 class ForeAft
 {
@@ -52,12 +25,13 @@ public:
 
 private:
 	// Variables
-	node * root;
-	int boardSize;
+	node *root, *current;
+	int boardSize, nodesVisited;
+	vector<node*> open, closed;
 
 	// Functions
 	void AStar();
-
+	
 	bool validNumber(int num, int beginRange, int endRange);
 	bool moveBlankUpOne(node *n);
 	bool moveBlankUpTwo(node *n);
@@ -68,8 +42,12 @@ private:
 	bool moveBlankRightOne(node *n);
 	bool moveBlankRightTwo(node *n);
 
+	float heuristic(node *n);
+
 	void copyNode(node *source, node *target);
 	void printBoard(node *n);
-	//bool isMoveable (direction dir, )
+	void getBoardId(node *n);
+
+	bool solutionFound(node *n);
 };
 

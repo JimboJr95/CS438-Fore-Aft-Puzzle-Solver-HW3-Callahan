@@ -13,17 +13,21 @@
 #include "ForeAft.h"
 #include <string>
 #include <iostream>
+#include "Heap.h"
+#include <algorithm>
 
 using namespace std;
 
 // Constructor
 ForeAft::ForeAft()
 {
+	nodesVisited = 0;
 }
 
 // Destructor
 ForeAft::~ForeAft()
 {
+	delete root;
 }
 
 
@@ -73,13 +77,13 @@ void ForeAft::run() {
 			boardSizeI = stoi(boardSizeS);
 		}
 		catch (exception e) {
-			cout << "Please select a value from 5 - 13\n\n";
+			cout << "\nInvalid value, enter a valid board size (5-13)\n\n";
 			goto board;
 		}
 
 		if (!validNumber(boardSizeI, 5, 13))
 		{
-			cout << "Enter a valid board size (5-13)\n";
+			cout << "\nInvalid value, enter a valid board size (5-13)\n\n";
 			goto board;
 		}
 
@@ -87,6 +91,10 @@ void ForeAft::run() {
 
 		// Initialize the root node
 		root = new node(boardSizeI);
+		root->partent = NULL;
+		root->f = 0;
+		root->g = 0;
+		root->h = 0;
 		for (int i = 0; i < boardSizeI; i++)
 		{
 			for (int j = 0; j < boardSizeI; j++)
@@ -102,18 +110,33 @@ void ForeAft::run() {
 					root->arr[i][j] = blue;
 			}
 		}
-
+		getBoardId(root);
 
 		// Perform selected search on selected size
 
-		printBoard(root);
-
-		delete root;
+		//printBoard(root);
+		AStar();
+		//delete root;
+		nodesVisited = 0;
 	}
 }
 
 void ForeAft::AStar() {
+	node *n;
+	current = root;
 
+
+}
+
+float ForeAft::heuristic(node *n) {
+	float tmp;
+
+	for (int i = 0; i < boardSize; i++)
+	{
+
+	}
+
+	return tmp;
 }
 
 bool ForeAft::moveBlankUpOne(node *n) {
@@ -246,4 +269,35 @@ void ForeAft::printBoard(node *n) {
 		}
 		cout << endl;
 	}
+}
+
+void ForeAft::getBoardId(node *n) {
+	// If the id hasn't been created yet
+	if (n->id == "") {
+		for (int i = 0; i < boardSize; i++)
+			for (int j = 0; j < boardSize; j++)
+				n->id.append(to_string(n->arr[i][j]));
+	}
+}
+
+// Returns if the solution has been found
+bool ForeAft::solutionFound(node *n) {
+	for (int i = 0; i < boardSize; i++)
+	{
+		for (int j = 0; j < boardSize; j++)
+		{
+			if (i == boardSize / 2 && j == boardSize / 2) {
+				if (n->arr[i][j] != blank)
+					return false;
+			}
+			else if ((i / (boardSize / 2 + 1)) == 0 && (j / (boardSize / 2 + 1)) == 0) {
+				if (n->arr[i][j] != blue)
+					return false;
+			}
+			else if ((i / (boardSize / 2)) >= 1 && (j / (boardSize / 2)) >= 1)
+					if (n->arr[i][j] != red)
+						return false;
+		}
+	}
+	return true;
 }
