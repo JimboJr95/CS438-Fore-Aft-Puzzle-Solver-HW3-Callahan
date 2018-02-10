@@ -23,8 +23,9 @@ struct node {
 	int blankR, blankC;
 	float f, g, h; // values for the heuristic
 	string id;
-	node *partent;
+	node *parent;
 
+	// basic constructor
 	node(int boardSize) {
 		arr = new color*[boardSize]; // initialize size of the array
 		blankR = 0;
@@ -44,6 +45,25 @@ struct node {
 				arr[i][j] = invalid;
 
 	}
+	
+	// copy constructor
+	node(node *n, int boardSize) {
+		arr = new color*[boardSize]; // initialize size of the array
+
+		// initialize second dimension of the array
+		for (int i = 0; i < boardSize; i++)
+			arr[i] = new color[boardSize];
+
+		for (int i = 0; i < boardSize; i++)
+			for (int j = 0; j < boardSize; j++)
+				this->arr[i][j] = n->arr[i][j];
+
+		this->blankR = n->blankR;
+		this->blankC = n->blankC;
+		this->f = n->f;
+		this->g = n->g;
+		this->h = n->h;
+	}
 };
 
 class Heap
@@ -57,6 +77,7 @@ public:
 	bool isEmpty();
 	int getSize();
 	void sort();
+	bool alreadyAdded(node *n);
 
 private:
 	node * root, **h;

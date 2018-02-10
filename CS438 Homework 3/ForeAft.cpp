@@ -22,12 +22,16 @@ using namespace std;
 ForeAft::ForeAft()
 {
 	nodesVisited = 0;
+	open = new Heap();
+	closed = new Heap();
 }
 
 // Destructor
 ForeAft::~ForeAft()
 {
 	delete root;
+	delete open;
+	delete closed;
 }
 
 
@@ -91,7 +95,7 @@ void ForeAft::run() {
 
 		// Initialize the root node
 		root = new node(boardSizeI);
-		root->partent = NULL;
+		root->parent = NULL;
 		root->f = 0;
 		root->g = 0;
 		root->h = 0;
@@ -123,21 +127,225 @@ void ForeAft::run() {
 
 void ForeAft::AStar() {
 	node *n;
+	bool moveable = false;
 	current = root;
 
+	// If the root is the solution (should never happen)
+	if (solutionFound(root))
+		return;
 
+	while (true) {
+		/*n = new node(current, boardSize);
+		n->partent = current;
+		if (moveBlankUpOne(n))
+		{
+			n->h = heuristic(n);
+			n->g = n->partent->g++;
+		}
+		else
+			delete n;*/
+		if (makeMove(UP))
+			break;
+		if (makeMove(UP2))
+			break;
+		if(makeMove(DOWN))
+			break;
+		if (makeMove(DOWN2))
+			break;
+		if (makeMove(LEFT))
+			break;
+		if (makeMove(LEFT2))
+			break;
+		if (makeMove(RIGHT))
+			break;
+		if (makeMove(RIGHT2))
+			break;
+
+		open->sort();
+
+		if (!open->isEmpty())
+		{
+			current = open->getFront();
+			closed->add(open->popFront());
+		}
+		else {
+			cout << "Ran out of explorable nodes.\nNo solution found.\n";
+			break;
+		}
+	}
+
+	printSolutionToScreen();
+	delete open;
+	delete closed;
+
+	open = new Heap();
+	closed = new Heap();
 }
 
+void ForeAft::printSolutionToScreen() {
+	while (current != NULL)
+	{
+		printBoard(current);
+		cout << endl;
+		current = current->parent;
+	}
+	cout << endl << "number of nodes created: " << open->getSize() + closed->getSize() << endl;
+}
+
+bool ForeAft::makeMove(direction d) {
+	node *n;
+	bool moveable = false;
+	n = new node(current, boardSize);
+	n->parent = current;
+
+	switch (d) {
+	case UP:
+		moveable = moveBlankUpOne(n);
+		break;
+	case UP2:
+		moveable = moveBlankUpTwo(n);
+		break;
+	case DOWN:
+		moveable = moveBlankDownOne(n);
+		break;
+	case DOWN2:
+		moveable = moveBlankDownTwo(n);
+		break;
+	case LEFT:
+		moveable = moveBlankLeftOne(n);
+		break;
+	case LEFT2:
+		moveable = moveBlankLeftOne(n);
+		break;
+	case RIGHT:
+		moveable = moveBlankRightOne(n);
+		break;
+	case RIGHT2:
+		moveable = moveBlankRightOne(n);
+		break;
+	}
+
+	// If there was a move to be made on the board
+	if (moveable)
+	{
+		getBoardId(n);
+		if (/*n->parent->parent != NULL && n->parent->parent->id == n->id*/ /*|| n->parent->id == n->id*/ open->alreadyAdded(n) || closed->alreadyAdded(n))
+			delete n;
+		else {
+			// If we found the solution
+			if (solutionFound(n)) {
+				current = n;
+				return true;
+			}
+			else {
+				n->h = heuristic(n);
+				n->g = n->parent->g++;
+				n->f = n->g + n->h;
+				open->add(n);
+				//printBoard(n);
+				cout << endl;
+			}
+		}
+	}
+	else
+		delete n;
+
+	return false;
+}
+
+/// another option would be to have the heuristic check how far a color is from the desired sides furthest corner and calc off of that
 float ForeAft::heuristic(node *n) {
-	float tmp;
+	float tmp = 0;
 
 	for (int i = 0; i < boardSize; i++)
 	{
+		for (int j = 0; j < boardSize; j++)
+		{
+			if (n->arr[i][j] != invalid && n->arr[i][j] != blank)
+			{
+				//if (j == 0 || i == 0)
+				//{
+				//	if (n->arr[i][j] == blue) // greater value
+				//		tmp += 1;
+				//	else // lesser value
+				//		tmp += 7;
+				//} // end row and col == 0 check
+				//else if (j == boardSize - 1 && i == boardSize - 1) {
+				//	if (n->arr[i][j] == red)
+				//		tmp += 1;
+				//	else
+				//		tmp += 7;
+				//}
+				//else if (i == 1 || j == 1) {
+				//	if (n->arr[i][j] == blue)
+				//		tmp += 2;
+				//	else
+				//		tmp += 6;
+				//}
+				//else if (i == boardSize-2 || j == boardSize-2) {
+				//	if (n->arr[i][j] == red)
+				//		tmp += 2;
+				//	else
+				//		tmp += 6;
+				//}
+				//else if (i == 2 || j == 2) {
+				//	if (n->arr[i][j] == blue)
+				//		tmp += 3;
+				//	else
+				//		tmp += 5;
+				//}
+				//else if (i == boardSize - 3 || j == boardSize - 3) {
+				//	if (n->arr[i][j] == red)
+				//		tmp += 3;
+				//	else
+				//		tmp += 5;
+				//}
 
-	}
+				// blue survival
+				if (i == 0 && j == 0 && n->arr[i][j] == blue)
+					tmp += 0;
+				else if (i == 1 && j == 0 && n->arr[i][j] == blue)
+					tmp += 0;
+				else if (i == 2 && j == 0 && n->arr[i][j] == blue)
+					tmp += 0;
+				else if (i == 0 && j == 1 && n->arr[i][j] == blue)
+					tmp += 0;
+				else if (i == 0 && j == 2 && n->arr[i][j] == blue)
+					tmp += 0;
+				// red survival
+				else if (i == boardSize-1 && j == boardSize-1 && n->arr[i][j] == red)
+					tmp += 0;
+				else if (i == boardSize-2 && j == boardSize-1 && n->arr[i][j] == red)
+					tmp += 0;
+				else if (i == boardSize-3 && j == boardSize-1 && n->arr[i][j] == red)
+					tmp += 0;
+				else if (i == boardSize-1 && j == boardSize-2 && n->arr[i][j] == red)
+					tmp += 0;
+				else if (i == boardSize-1 && j == boardSize-3 && n->arr[i][j] == red)
+					tmp += 0;
+				else if (i == boardSize-1 && j == boardSize-1 && n->arr[i][j] == red)
+					tmp += 0;
+				// general survival
+				else if (n->arr[i][j] == blue)
+					tmp += manhattanDistance(i, 0, j, 0);
+				else 
+					tmp += manhattanDistance(i, boardSize-1, j, boardSize-1);
 
-	return tmp;
+			} // end check if not invalid and not blank
+		} // end for loop (j -> col)
+	} // end for loop (i -> row)
+
+	return C * tmp;
 }
+
+// Mantatten distance for heuristic calculation
+int ForeAft::manhattanDistance(int row1, int row2, int col1, int col2) {
+	return(abs(row1 - row2) + abs(col1 - col2));
+}
+
+
+
+/////// Functions for making moves in node 2d array ///////
 
 bool ForeAft::moveBlankUpOne(node *n) {
 	if (n->blankR - 1 >= 0 && n->arr[n->blankR - 1][n->blankC] != invalid)
@@ -164,7 +372,7 @@ bool ForeAft::moveBlankUpTwo(node *n) {
 }
 
 bool ForeAft::moveBlankDownOne(node *n) {
-	if (n->arr[n->blankR + 1][n->blankC] != invalid && n->blankR + 1 < boardSize)
+	if (n->blankR + 1 < boardSize && n->arr[n->blankR + 1][n->blankC] != invalid)
 	{
 		n->arr[n->blankR][n->blankC] = n->arr[n->blankR + 1][n->blankC];
 		n->arr[n->blankR + 1][n->blankC] = blank;
@@ -234,6 +442,10 @@ bool ForeAft::moveBlankRightTwo(node *n) {
 
 	return false;
 }
+
+
+
+/////// Variaous board utilities ///////
 
 // Copy board from source to target
 void ForeAft::copyNode(node *source, node *target) {

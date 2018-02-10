@@ -61,8 +61,9 @@ node * Heap::popFront() {
 	return tmp;
 }
 
+// possible prob here?
 void Heap::buildMaxHeap() {
-	for (int i = count - 1; i >= 0; i--)
+	for (int i = count / 2 - 1; i >= 0; i--)
 		heapify(i);
 }
 
@@ -77,26 +78,26 @@ void Heap::heapsort() {
 }
 
 void Heap::heapify(int i) {
-	int l = left(i), r = right(i), largest;
+	int l = left(i), r = right(i), smallest;
 
-	if (l < count && h[l]->f > h[i]->f)
-		largest = l;
+	if (l < count && h[l]->f < h[i]->f)
+		smallest = l;
 	else
-		largest = i;
+		smallest = i;
 
-	if (r < count && h[r]->f > h[largest]->f)
-		largest = r;
+	if (r < count && h[r]->f < h[smallest]->f)
+		smallest = r;
 
-	if (largest != i)
+	if (smallest != i)
 	{
-		swap(h[i], h[largest]);
-		heapify(largest);
+		swap(h[i], h[smallest]);
+		heapify(smallest);
 	}
 }
 
 // Is the heap empty
 bool Heap::isEmpty() {
-	if (count == 0)
+	if (count <= 0)
 		return true;
 
 	return false;
@@ -123,4 +124,14 @@ int Heap::left(int i) {
 // Finds right child for heap
 int Heap::right(int i) {
 	return 2 * i + 2;
+}
+
+bool Heap::alreadyAdded(node *n) {
+	for (int i = 0; i < count; i++)
+	{
+		if (h[i]->id == n->id)
+			return true;
+	}
+
+	return false;
 }
