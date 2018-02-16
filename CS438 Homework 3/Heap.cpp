@@ -14,11 +14,15 @@ using namespace std;
 Heap::Heap()
 {
 	count = 0;
-	heapSize = 50000;
+	poppedNum = 0;
+	heapSize = 300000;
 	h = new node*[heapSize];
+	popped = new node*[heapSize];
 
-	for (int i = 0; i < heapSize; i++)
+	for (int i = 0; i < heapSize; i++) {
 		h[i] = NULL;
+		popped[i] = NULL;
+	}
 }
 
 Heap::~Heap()
@@ -26,7 +30,11 @@ Heap::~Heap()
 	for (int i = 0; i < count; i++)
 		delete h[i];
 
-	delete []h;
+	for (int i = 0; i < poppedNum; i++)
+		delete popped[i];
+
+	delete[]h;
+	delete[]popped;
 }
 
 void Heap::sort() {
@@ -39,11 +47,11 @@ void Heap::add(node *n) {
 		heapSize += 50000;
 		node **newH = new node*[heapSize];
 		node **tmp;
+		
 
 		for (int i = 0; i < count; i++)
-		{
 			newH[i] = h[i];
-		}
+
 		tmp = h;
 		h = newH;
 		delete []tmp; // need to make sure this doesn't eliminate data
@@ -51,6 +59,7 @@ void Heap::add(node *n) {
 
 	h[count] = n;
 	count++;
+	sort();
 }
 
 node * Heap::popFront() {
@@ -58,6 +67,9 @@ node * Heap::popFront() {
 	h[0] = h[count - 1];
 	count--;
 	sort();
+	// add check if popped num has exceeded limit
+	popped[poppedNum] = tmp;
+	poppedNum++;
 	return tmp;
 }
 
@@ -95,6 +107,12 @@ void Heap::heapify(int i) {
 	}
 }
 
+//void Heap::swap(node *a, node *b) {
+//	node *tmp = a;
+//	a = b;
+//	b = tmp;
+//}
+
 // Is the heap empty
 bool Heap::isEmpty() {
 	if (count <= 0)
@@ -126,12 +144,12 @@ int Heap::right(int i) {
 	return 2 * i + 2;
 }
 
-bool Heap::alreadyAdded(node *n) {
-	for (int i = 0; i < count; i++)
-	{
-		if (h[i]->id == n->id)
-			return true;
-	}
-
-	return false;
-}
+//bool Heap::alreadyAdded(node *n) {
+//	for (int i = 0; i < count; i++)
+//	{
+//		if (h[i]->id == n->id)
+//			return true;
+//	}
+//
+//	return false;
+//}

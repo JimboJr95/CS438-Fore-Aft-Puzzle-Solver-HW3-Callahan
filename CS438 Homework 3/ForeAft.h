@@ -10,6 +10,9 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <time.h>
+#include <fstream>
+#include <set>
 
 typedef int direction;
 
@@ -30,10 +33,16 @@ public:
 private:
 	// Variables
 	node *root, *current;
-	int boardSize, nodesVisited;
-	float C = 2.0; // C value is constant for heuristic
+	//string solution;
+	long solution;
+	int boardSize, nodesVisited, expRowBlue, expRowRed, expColBlue, expColRed;
+	int C = 10; // C value is constant for heuristic
 	//vector<node*> open, closed;
-	Heap *open, *closed;
+	Heap *open;
+	time_t timer;
+	//set<string> found;
+	set<long> found;
+	set<long> done;
 
 	// Functions
 	void AStar();
@@ -55,9 +64,13 @@ private:
 	void copyNode(node *source, node *target);
 	void printBoard(node *n);
 	void printSolutionToScreen();
-	void printSolutionToFile();
+	void printSolutionToFile(ofstream &outfile, string filename);
 	void getBoardId(node *n);
 
 	bool solutionFound(node *n);
+	long getNum(node *n);
+
+	void startTimer();
+	void endTimer();
 };
 
