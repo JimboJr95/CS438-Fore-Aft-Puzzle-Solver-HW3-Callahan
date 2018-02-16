@@ -15,9 +15,10 @@ Heap::Heap()
 {
 	count = 0;
 	poppedNum = 0;
-	heapSize = 300000;
+	heapSize = 50;
+	poppedSize = 50000;
 	h = new node*[heapSize];
-	popped = new node*[heapSize];
+	popped = new node*[poppedSize];
 
 	for (int i = 0; i < heapSize; i++) {
 		h[i] = NULL;
@@ -43,23 +44,40 @@ void Heap::sort() {
 
 void Heap::add(node *n) {
 	// If the heap is full, expand the array
-	if (count+1 > heapSize) {
-		heapSize += 50000;
-		node **newH = new node*[heapSize];
-		node **tmp;
-		
+	//if (count+1 > heapSize) {
+	//	heapSize += 50000;
+	//	node **newH = new node*[heapSize];
+	//	node **tmp;
+	//	
 
-		for (int i = 0; i < count; i++)
-			newH[i] = h[i];
+	//	for (int i = 0; i < count; i++)
+	//		newH[i] = h[i];
 
-		tmp = h;
-		h = newH;
-		delete []tmp; // need to make sure this doesn't eliminate data
+	//	tmp = h;
+	//	h = newH;
+	//	delete []tmp; // need to make sure this doesn't eliminate data
+	//}
+
+	//h[count] = n;
+	//count++;
+
+	if (count+1 > heapSize)
+	{
+		count = heapSize / 2;
+
+		if (poppedNum + heapSize / 2 > poppedSize)
+			expandPopped();
+
+		for (int i = heapSize / 2; i < heapSize; i++) {
+			popped[poppedNum] = h[i];
+			poppedNum++;
+		}
 	}
 
 	h[count] = n;
 	count++;
-	sort();
+
+	//sort();
 }
 
 node * Heap::popFront() {
@@ -68,6 +86,9 @@ node * Heap::popFront() {
 	count--;
 	sort();
 	// add check if popped num has exceeded limit
+	if (poppedNum + 1 > poppedSize)
+		expandPopped();
+
 	popped[poppedNum] = tmp;
 	poppedNum++;
 	return tmp;
@@ -84,7 +105,7 @@ void Heap::heapsort() {
 
 	for (int i = count - 1; i >= 0; i--)
 	{
-		swap(h[0], h[i]); // may or may not work
+		swap(h[0], h[i]);
 		heapify(0);
 	}
 }
@@ -153,3 +174,15 @@ int Heap::right(int i) {
 //
 //	return false;
 //}
+
+void Heap::expandPopped() {
+	poppedSize += 10000;
+	node **tmp = new node*[poppedSize];
+
+	for (int i = 0; i < poppedNum; i++)
+		tmp[i] = popped[i];
+
+	//delete[]popped;
+
+	popped = tmp;
+}

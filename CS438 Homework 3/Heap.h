@@ -101,7 +101,7 @@ public:
 private:
 	node *root, **h, **popped;
 	//node h[50000];
-	int count, heapSize, poppedNum;
+	int count, heapSize, poppedNum, poppedSize;
 
 	int parent(int i);
 	int left(int i);
@@ -110,6 +110,7 @@ private:
 	void heapsort();
 	void buildMaxHeap();
 	void heapify(int i);
+	void expandPopped();
 	//void swap(node *a, node *b);
 };
 

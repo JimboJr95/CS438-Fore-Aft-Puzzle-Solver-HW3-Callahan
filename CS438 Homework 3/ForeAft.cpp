@@ -189,7 +189,7 @@ void ForeAft::AStar() {
 		if (makeMove(RIGHT2))
 			break;
 
-		//open->sort();
+		open->sort();
 
 		if (!open->isEmpty())
 		{
@@ -198,7 +198,7 @@ void ForeAft::AStar() {
 			open->popFront();
 			//closed->add(open->popFront());
 			//printBoard(current);
-			//cout << endl << "current f (above): " << current->f << endl;
+			//cout << "current f (above): " << current->f << endl << endl;
 		}
 		else {
 			std::cout << "Ran out of explorable nodes.\nNo solution found.\n";
@@ -337,6 +337,7 @@ float ForeAft::heuristic(node *n) {
 	float tmp = 0.0;
 	int t = 0, rcb = 0, rcr = 0, divB = 1, divR = 1;
 
+	// Works for 5x5
 	for (int i = 0; i <= boardSize/2; i++)
 	{
 		for (int j = 0; j <= boardSize/2; j++)
@@ -383,6 +384,55 @@ float ForeAft::heuristic(node *n) {
 			rcr = 99;
 	}
 
+
+
+
+	// Worked for 5x5, but slower
+	//int blueRow = 0, blueCol = 0, redRow = boardSize-1, redCol = boardSize-1;
+
+	//for (int i = 0; i < boardSize; i++)
+	//{
+	//	for (int j = 0; j < boardSize; j++)
+	//	{
+	//		// top half of the board
+	//		if (n->arr[i][j] == blue) {
+	//			tmp += manhattanDistance(i, blueRow, j, blueCol);
+
+	//			if(i <= boardSize/2)
+	//				blueCol++;
+	//		}
+	//	}
+
+	//	if (blueCol == boardSize/2 + 1) {
+	//		blueCol = 0;
+	//		blueRow++;
+	//		rcb++;
+	//	}
+	//	else
+	//		blueCol = 99;
+	//}
+
+	//for (int i = boardSize-1; i >= 0; i--)
+	//{
+	//	for (int j = boardSize; j >= 0; j--)
+	//	{
+	//		// top half of the board
+	//		if (n->arr[i][j] == red) {
+	//			tmp += manhattanDistance(i, redRow, j, redCol);
+
+	//			if (i >= boardSize / 2)
+	//				redCol--;
+	//		}
+	//	}
+
+	//	if (blueCol == boardSize / 2 + 1) {
+	//		blueCol = boardSize-1;
+	//		blueRow--;
+	//		rcr++;
+	//	}
+	//	else
+	//		redCol = 99;
+	//}
 
 
 
