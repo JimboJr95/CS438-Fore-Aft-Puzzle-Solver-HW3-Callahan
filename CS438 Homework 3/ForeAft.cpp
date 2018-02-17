@@ -2,7 +2,7 @@
 // Author:		James Callahan
 // Class:		CS438 (Artificial Intelligence)
 // File:		ForeAft.cpp
-// Due Date:	15 February 2018
+// Due Date:	22 February 2018
 //
 // Description:
 //		This program is meant to solve a fore aft puzzle given a board size (example: https://www.cheesygames.com/foreaft/ )
@@ -28,9 +28,8 @@ ForeAft::ForeAft()
 	expRowRed = 0;
 	expColBlue = 0;
 	expColRed = 0;
-	open = new Heap();
 	solution = 0;
-//	closed = new Heap();
+	open = new Heap();
 }
 
 // Destructor
@@ -38,14 +37,13 @@ ForeAft::~ForeAft()
 {
 	delete root;
 	delete open;
-	//delete closed;
 }
 
 
 // Utility functions
 // Handles the execution of everything from this class
 void ForeAft::run() {
-	int inputI, quit = 2, boardSizeI;
+	int inputI, quit = 4, boardSizeI, validNumFinal = 5;
 	string inputS, boardSizeS;
 
 	while (true)
@@ -53,7 +51,9 @@ void ForeAft::run() {
 	begin:;
 		cout << "Select a search method:\n";
 		cout << "\t1. Best First Search\n";
-		cout << "\t2. Exit\n";
+		cout << "\t2. Breadth First Search (BFS)\n";
+		cout << "\t3. Depth First Search (DFS)\n";
+		cout << "\t4. Exit\n";
 		cin >> inputS;
 		
 		// Validate that the entered value is an int
@@ -64,7 +64,7 @@ void ForeAft::run() {
 			goto begin;
 		}
 
-		if (!validNumber(inputI, 1, 2))
+		if (!validNumber(inputI, 1, 4))
 		{
 			cout << "Please enter a valid number from 1 to 2\n";
 			goto begin;
@@ -77,9 +77,16 @@ void ForeAft::run() {
 
 	board:;
 		// Get board size
-		if (inputI == 1)
-		{
+		if (inputI == 1){
 			cout << "Enter board size for A* (5 - 13): ";
+			cin >> boardSizeS;
+		}
+		else if (inputI == 2){
+			cout << "Enter board size for BFS (5): ";
+			cin >> boardSizeS;
+		}
+		else if (inputI == 3) {
+			cout << "Enter board size for DFS (5): ";
 			cin >> boardSizeS;
 		}
 
@@ -88,13 +95,21 @@ void ForeAft::run() {
 			boardSizeI = stoi(boardSizeS);
 		}
 		catch (exception e) {
-			cout << "\nInvalid value, enter a valid board size (5-13)\n\n";
+			cout << "\nInvalid value, enter a valid board size\n\n";
 			goto board;
 		}
 
-		if (!validNumber(boardSizeI, 5, 13))
+		// Set largest allowed value for the given algorithm
+		if (inputI == 1)
+			validNumFinal = 13;
+		else if (inputI == 2)
+			validNumFinal = 5;
+		else if (inputI == 3)
+			validNumFinal = 5;
+
+		if (!validNumber(boardSizeI, 5, validNumFinal))
 		{
-			cout << "\nInvalid value, enter a valid board size (5-13)\n\n";
+			cout << "\nInvalid value, enter a valid board size\n\n";
 			goto board;
 		}
 
@@ -125,37 +140,31 @@ void ForeAft::run() {
 					root->arr[i][j] = blue;
 			}
 		}
-		getBoardId(root);
-		getNum(root);
 
-		// get solution string
-		/*for (int i = boardSize-1; i >= 0; i--)
-			for (int j = boardSize-1; j >= 0; j--)
-				solution.append(to_string(root->arr[i][j]));*/
+		getNum(root);
 
 		for (int i = boardSize - 1; i >= 0; i--)
 			for (int j = boardSize - 1; j >= 0; j--)
 				solution = solution * 3 + root->arr[i][j];
 
-//				num = num * 3 + n->arr[i][j];
-
 		// Perform selected search on selected size
-
-		//printBoard(root);
-		AStar();
-		//delete root;
+		if (inputI == 1)
+			AStar();
+		else if (inputI == 2)
+			BFS();
+		else
+			DFS();
+		
+		// Reset variables as needed
 		nodesVisited = 0;
-		//solution = "";
 		solution = 0;
 	}
 }
 
 void ForeAft::AStar() {
-	//node *n;
 	bool moveable = false;
-	current = root;
 	ofstream out;
-
+	current = root;
 	startTimer();
 
 	// If the root is the solution (should never happen)
@@ -163,30 +172,21 @@ void ForeAft::AStar() {
 		return;
 
 	while (true) {
-		/*n = new node(current, boardSize);
-		n->partent = current;
-		if (moveBlankUpOne(n))
-		{
-			n->h = heuristic(n);
-			n->g = n->partent->g++;
-		}
-		else
-			delete n;*/
-		if (makeMove(UP))
+		if (makeMove(UP, aStar))
 			break;
-		if (makeMove(UP2))
+		if (makeMove(UP2, aStar))
 			break;
-		if(makeMove(DOWN))
+		if (makeMove(DOWN, aStar))
 			break;
-		if (makeMove(DOWN2))
+		if (makeMove(DOWN2, aStar))
 			break;
-		if (makeMove(LEFT))
+		if (makeMove(LEFT, aStar))
 			break;
-		if (makeMove(LEFT2))
+		if (makeMove(LEFT2, aStar))
 			break;
-		if (makeMove(RIGHT))
+		if (makeMove(RIGHT, aStar))
 			break;
-		if (makeMove(RIGHT2))
+		if (makeMove(RIGHT2, aStar))
 			break;
 
 		open->sort();
@@ -194,9 +194,7 @@ void ForeAft::AStar() {
 		if (!open->isEmpty())
 		{
 			current = open->getFront();
-			//found.emplace(current->id); ///////////////////////////// need to add sting to closed
 			open->popFront();
-			//closed->add(open->popFront());
 			//printBoard(current);
 			//cout << "current f (above): " << current->f << endl << endl;
 		}
@@ -206,18 +204,112 @@ void ForeAft::AStar() {
 		}
 	}
 
-	//printSolutionToScreen();
 	printSolutionToFile(out, "best" + to_string(boardSize) + ".out");
 	endTimer();
 
 	delete open;
-	//delete closed;
 
 	open = new Heap();
-	//closed = new Heap();
 	found.clear();
 }
 
+// Uses Breadth First Search (only for 5x5 board)
+void ForeAft::BFS() {
+	bool moveable = false;
+	ofstream out;
+	current = root;
+	startTimer();
+
+	// If the root is the solution (should never happen)
+	if (solutionFound(root))
+		return;
+
+	while (true) {
+		if (makeMove(UP, bfs))
+			break;
+		if (makeMove(UP2, bfs))
+			break;
+		if (makeMove(DOWN, bfs))
+			break;
+		if (makeMove(DOWN2, bfs))
+			break;
+		if (makeMove(LEFT, bfs))
+			break;
+		if (makeMove(LEFT2, bfs))
+			break;
+		if (makeMove(RIGHT, bfs))
+			break;
+		if (makeMove(RIGHT2, bfs))
+			break;
+
+		if (!openList.empty())
+		{
+			current = openList.front();
+			closedList.emplace_back(openList.front());
+			openList.pop_front();
+		}
+		else {
+			std::cout << "Ran out of explorable nodes.\nNo solution found.\n";
+			break;
+		}
+	}
+
+	printSolutionToFile(out, "bfs" + to_string(boardSize) + ".out");
+	endTimer();
+	found.clear();
+	openList.clear();
+	closedList.clear();
+}
+
+// Uses Depth First Search
+void ForeAft::DFS() {
+	bool moveable = false;
+	ofstream out;
+	current = root;
+	startTimer();
+
+	// If the root is the solution (should never happen)
+	if (solutionFound(root))
+		return;
+
+	while (true) {
+		if (makeMove(UP, dfs))
+			break;
+		if (makeMove(UP2, dfs))
+			break;
+		if (makeMove(DOWN, dfs))
+			break;
+		if (makeMove(DOWN2, dfs))
+			break;
+		if (makeMove(LEFT, dfs))
+			break;
+		if (makeMove(LEFT2, dfs))
+			break;
+		if (makeMove(RIGHT, dfs))
+			break;
+		if (makeMove(RIGHT2, dfs))
+			break;
+
+		if (!openList.empty())
+		{
+			current = openList.front();
+			closedList.emplace_back(openList.front());
+			openList.pop_front();
+		}
+		else {
+			std::cout << "Ran out of explorable nodes.\nNo solution found.\n";
+			break;
+		}
+	}
+
+	printSolutionToFile(out, "dfs" + to_string(boardSize) + ".out");
+	endTimer();
+	found.clear();
+	openList.clear();
+	closedList.clear();
+}
+
+// Outputs the final solution to the console
 void ForeAft::printSolutionToScreen() {
 	while (current != NULL)
 	{
@@ -228,6 +320,7 @@ void ForeAft::printSolutionToScreen() {
 	std::cout << endl << "number of nodes created: " << open->getSize() + found.size() << endl;
 }
 
+// Outputs the final solution to a file given an output file stream and filename
 void ForeAft::printSolutionToFile(ofstream &outfile, string filename) {
 	outfile.open(filename);
 	list<node*> list;
@@ -268,7 +361,10 @@ void ForeAft::printSolutionToFile(ofstream &outfile, string filename) {
 	outfile.close();
 }
 
-bool ForeAft::makeMove(direction d) {
+// This function takes a direction (typedef int, ForeAft.h) and depending on the direction passed in will try to make that move.
+// Possible directions are listed in the ForeAft.h file (ex: UP, DOWN, etc.)
+// It returns true if the solution has been found
+bool ForeAft::makeMove(direction d, algorithm a) {
 	node *n;
 	bool moveable = false;
 	n = new node(current, boardSize);
@@ -304,25 +400,37 @@ bool ForeAft::makeMove(direction d) {
 	// If there was a move to be made on the board
 	if (moveable)
 	{
-		//getBoardId(n);
-		getNum(n);
-		if ( found.find(n->num) != found.end() /*found.find(n->id) != found.end()*/ /*open->alreadyAdded(n) || closed->alreadyAdded(n)*/)
+		getNum(n); // get the number for the board and determine if it is unique
+		if ( found.find(n->num) != found.end() )
 			delete n;
 		else {
-			//found.emplace(n->id);
+			// Add the board to the found list if it is unique
 			found.emplace(n->num);
+
 			// If we found the solution
 			if (solutionFound(n)) {
 				current = n;
 				return true;
 			}
 			else {
-				n->h = heuristic(n);
-				n->g = n->parent->g++;
-				n->f = n->g + n->h;
-				open->add(n);
-				//printBoard(n);
-				//cout << endl;
+				switch (a)
+				{
+				case aStar:
+					n->h = heuristic(n);
+					n->g = n->parent->g++;
+					n->f = n->g + n->h;
+					open->add(n);
+					break;
+				case bfs:
+					openList.emplace_back(n);
+					break;
+				case dfs:
+					openList.emplace_front(n);
+					break;
+				default:
+					break;
+				}
+				
 			}
 		}
 	}
@@ -332,17 +440,19 @@ bool ForeAft::makeMove(direction d) {
 	return false;
 }
 
-/// another option would be to have the heuristic check how far a color is from the desired sides furthest corner and calc off of that
+
+// This function calculates the h (heuristic) value for a given node
+// It bases the value off of if the node is on its correct side or not and gives bonuses to the boards that have completed rows
+// The row completion bonus is only given if each previous row has been filled with the porper color
 float ForeAft::heuristic(node *n) {
-	float tmp = 0.0;
+	float tmp = 0, a;
 	int t = 0, rcb = 0, rcr = 0, divB = 1, divR = 1;
 
-	// Works for 5x5
+	// This goes over the top half of the board and adds distances for the red values
 	for (int i = 0; i <= boardSize/2; i++)
 	{
 		for (int j = 0; j <= boardSize/2; j++)
 		{
-			// top half of the board
 			// If it is red
 			if (n->arr[i][j] == red) {
 				tmp += manhattanDistance(i, boardSize, j, boardSize);
@@ -360,6 +470,7 @@ float ForeAft::heuristic(node *n) {
 			rcb = 99;
 	}
 
+	// This goes over the bottom half of the board and adds distances for the blue values
 	for (int i = boardSize-1; i >= boardSize/2; i--)
 	{
 		for (int j = boardSize-1; j >= boardSize/2; j--)
@@ -384,323 +495,10 @@ float ForeAft::heuristic(node *n) {
 			rcr = 99;
 	}
 
-
-
-
-	// Worked for 5x5, but slower
-	//int blueRow = 0, blueCol = 0, redRow = boardSize-1, redCol = boardSize-1;
-
-	//for (int i = 0; i < boardSize; i++)
-	//{
-	//	for (int j = 0; j < boardSize; j++)
-	//	{
-	//		// top half of the board
-	//		if (n->arr[i][j] == blue) {
-	//			tmp += manhattanDistance(i, blueRow, j, blueCol);
-
-	//			if(i <= boardSize/2)
-	//				blueCol++;
-	//		}
-	//	}
-
-	//	if (blueCol == boardSize/2 + 1) {
-	//		blueCol = 0;
-	//		blueRow++;
-	//		rcb++;
-	//	}
-	//	else
-	//		blueCol = 99;
-	//}
-
-	//for (int i = boardSize-1; i >= 0; i--)
-	//{
-	//	for (int j = boardSize; j >= 0; j--)
-	//	{
-	//		// top half of the board
-	//		if (n->arr[i][j] == red) {
-	//			tmp += manhattanDistance(i, redRow, j, redCol);
-
-	//			if (i >= boardSize / 2)
-	//				redCol--;
-	//		}
-	//	}
-
-	//	if (blueCol == boardSize / 2 + 1) {
-	//		blueCol = boardSize-1;
-	//		blueRow--;
-	//		rcr++;
-	//	}
-	//	else
-	//		redCol = 99;
-	//}
-
-
-
-	//int tmp = 0;
-	//int rowR = 0, rowB = 0, colR = 0, colB = 0, rc = 0, cc = 0, row = 0, col = 0;
-
-	//for (int i = 0; i < boardSize / 2; i++)
-	//{
-	//	for (int j = 0; j < boardSize; j++)
-	//	{
-	//		if (n->arr[i][j] != invalid && n->arr[i][j] != blank)
-	//		{
-	//			//if (j == 0 || i == 0)
-	//			//{
-	//			//	if (n->arr[i][j] == blue) // greater value
-	//			//		tmp += 1;
-	//			//	else // lesser value
-	//			//		tmp += 7;
-	//			//} // end row and col == 0 check
-	//			//else if (j == boardSize - 1 && i == boardSize - 1) {
-	//			//	if (n->arr[i][j] == red)
-	//			//		tmp += 1;
-	//			//	else
-	//			//		tmp += 7;
-	//			//}
-	//			//else if (i == 1 || j == 1) {
-	//			//	if (n->arr[i][j] == blue)
-	//			//		tmp += 2;
-	//			//	else
-	//			//		tmp += 6;
-	//			//}
-	//			//else if (i == boardSize-2 || j == boardSize-2) {
-	//			//	if (n->arr[i][j] == red)
-	//			//		tmp += 2;
-	//			//	else
-	//			//		tmp += 6;
-	//			//}
-	//			//else if (i == 2 || j == 2) {
-	//			//	if (n->arr[i][j] == blue)
-	//			//		tmp += 3;
-	//			//	else
-	//			//		tmp += 5;
-	//			//}
-	//			//else if (i == boardSize - 3 || j == boardSize - 3) {
-	//			//	if (n->arr[i][j] == red)
-	//			//		tmp += 3;
-	//			//	else
-	//			//		tmp += 5;
-	//			//}
-
-	//			// blue survival
-	//			//if (i == 0 && j == 0 && n->arr[i][j] == blue)
-	//			//	tmp += 0;
-	//			//else if (i == 1 && j == 0 && n->arr[i][j] == blue)
-	//			//	tmp += 0;
-	//			//else if (i == 2 && j == 0 && n->arr[i][j] == blue)
-	//			//	tmp += 0;
-	//			//else if (i == 0 && j == 1 && n->arr[i][j] == blue)
-	//			//	tmp += 0;
-	//			//else if (i == 0 && j == 2 && n->arr[i][j] == blue)
-	//			//	tmp += 0;
-	//			//// red survival
-	//			//else if (i == boardSize-1 && j == boardSize-1 && n->arr[i][j] == red)
-	//			//	tmp += 0;
-	//			//else if (i == boardSize-2 && j == boardSize-1 && n->arr[i][j] == red)
-	//			//	tmp += 0;
-	//			//else if (i == boardSize-3 && j == boardSize-1 && n->arr[i][j] == red)
-	//			//	tmp += 0;
-	//			//else if (i == boardSize-1 && j == boardSize-2 && n->arr[i][j] == red)
-	//			//	tmp += 0;
-	//			//else if (i == boardSize-1 && j == boardSize-3 && n->arr[i][j] == red)
-	//			//	tmp += 0;
-	//			//else if (i == boardSize-1 && j == boardSize-1 && n->arr[i][j] == red)
-	//			//	tmp += 0;
-
-
-	//			// could give rewards for completing whole row or column then keep stacking rewards
-	//			if (/*i <= boardSize-4 &&*/ n->arr[i][j] == blue) {
-	//				//tmp += 0;
-	//				tmp += manhattanDistance(i, row, j, col);
-	//				if (rc == i) {
-	//					rowB++;
-	//					col++;
-	//				}
-	//			}
-	//			//else if (j <= boardSize-4 && n->arr[i][j] == blue) {
-	//			//	tmp += 0;
-	//			//	//if(cc == i)
-	//			//	//colB++;
-	//			//}
-	//			/*else if (i >= boardSize - (boardSize-4) && n->arr[i][j] == red) {
-	//				tmp += 0;
-	//				if(rc == i)
-	//					rowR++;
-	//			}
-	//			else if (j >= boardSize - (boardSize - 4) && n->arr[i][j] == red) {
-	//				tmp += 0;
-	//				colR++;
-	//			}*/
-	//			/*else if (n->arr[i][j] == blue && i <= boardSize/2  ) {
-	//				tmp += 0;
-	//			}
-	//			else if (n->arr[i][j] == red && i > boardSize / 2 + 1) {
-	//				tmp += 0;
-	//			}*/
-	//			// general survival
-	//			/*else if (n->arr[i][j] == blue) {
-	//				tmp += manhattanDistance(i, 0, j, 0);
-	//			}*/
-	//			/*else {
-	//				tmp += manhattanDistance(i, boardSize - 1, j, boardSize - 1);
-	//			}*/
-
-	//			// red is being analyzed in the wrong order for booosts... -> fixed
-
-
-	//		} // end check if not invalid and not blank
-	//		// incrementing for each makes comparisons below easier
-	//		else {
-	//			//rowR++;
-	//			//rowB++;
-	//			//colR++;
-	//			//colB++;
-	//		}
-	//	} // end for loop (j -> col)
-
-	//	if (rowB == boardSize/2 + 1) {
-	//		//tmp -= 1000;
-	//		row++;
-	//		col = 0;
-	//		/*if (tmp - 1350 > 0)
-	//			tmp -= 1350;
-	//		else
-	//			tmp = 0;*/
-	//		//tmp = tmp / 2;
-	//		rc++;
-	//	}
-	//	/*if (rowR == boardSize) {
-	//		tmp -= 1350;
-	//		rc++;
-	//	}*/
-	//	/*if (colR == boardSize) {
-	//		tmp -= 1350;
-	//		cc++;
-	//	}
-	//	if (colB == boardSize) {
-	//		tmp -= 1350;
-	//		cc++;
-	//	}*/
-	//	/*if (i == boardSize / 2 + 1)
-	//		rc = i + 1;*/
-
-	//	//rowR = 0;
-	//	rowB = 0;
-	//	//colR = 0;
-	//	//colB = 0;
-	//} // end for loop (i -> row)
-
-	//rc = boardSize - 1;
-	//row = boardSize - 1;
-	//col = boardSize - 1;
-	//int a = boardSize - 1, b = boardSize - 1;
-
-	//for (int i = boardSize - 1; i >= 0 /*boardSize / 2*/; i--)
-	//{
-	//	for (int j = 0; j < boardSize; j++)
-	//	{
-	//		if (n->arr[i][j] != blank && n->arr[i][j] != invalid)
-	//		{
-
-	//			//if (i >= boardSize - (boardSize / 2) && n->arr[i][j] == red) {
-	//			//	//tmp += 0;
-	//			//	if (rc == i)
-	//			//		rowR++;
-	//			//}
-	//			if (/*j >= boardSize - (boardSize / 2) &&*/ n->arr[i][j] == red) {
-	//				tmp += manhattanDistance(i, row, j, col);
-	//				if (rc == i) {
-	//					rowR++;
-	//					col--;
-	//				}
-	//				//tmp += 0;
-	//				//colR++;
-	//			}
-	//			/*else if (n->arr[i][j] == blue) {
-	//				tmp += manhattanDistance(i, 0, j, 0);
-	//			}*/
-	//			/*else {
-	//				tmp += manhattanDistance(i, boardSize - 1, j, boardSize - 1);
-	//			}*/
-	//		}
-	//		else {
-	//			//rowR++;
-	//		}
-
-	//		/*if (col == boardSize / 2) {
-	//			row--;
-	//			col = boardSize - 1;
-	//		}*/
-	//	}
-
-	//	if (rowR == boardSize / 2 + 1) {
-	//		//tmp -= 1000;
-	//		row--;
-	//		col = boardSize - 1;
-	//		/*if (tmp - 1350 > 0)
-	//			tmp -= 1350;
-	//		else
-	//			tmp = 0;*/
-	//		//tmp = tmp / 2;
-	//		rc--;
-	//	}
-
-	//	rowR = 0;
-	//}
-
-	//int t = 0;
-	//for (int i = 0; i < boardSize - 4; i++)
-	//{
-	//	for (int j = 0; j < boardSize; j++)
-	//	{
-	//		if (n->arr[i][j] == blue /*|| n->arr[i][j] == blank*/ || n->arr[i][j] == invalid)
-	//			t++;
-	//	}
-	//	if (t == boardSize)
-	//		tmp -= 20;
-	//	t = 0;
-	//}
-
-	//for (int i = boardSize-1; i >= boardSize - 4; i--)
-	//{
-	//	for (int j = 0; j < boardSize; j++)
-	//	{
-	//		if (n->arr[i][j] == red /*|| n->arr[i][j] == blank*/ || n->arr[i][j] == invalid)
-	//			t++;
-	//	}
-	//	if (t == boardSize)
-	//		tmp -= 20;
-	//	t = 0;
-	//}
-
-	//for (int i = 0; i < boardSize - 4; i++)
-	//{
-	//	for (int j = 0; j < boardSize; j++)
-	//	{
-	//		if (n->arr[j][i] == blue /*|| n->arr[i][j] == blank*/ || n->arr[i][j] == invalid)
-	//			t++;
-	//	}
-	//	if (t == boardSize)
-	//		tmp -= 20;
-	//	t = 0;
-	//}
-
-	//for (int i = boardSize - 1; i >= boardSize - 4; i--)
-	//{
-	//	for (int j = 0; j < boardSize; j++)
-	//	{
-	//		if (n->arr[j][i] == red /*|| n->arr[i][j] == blank*/ || n->arr[i][j] == invalid)
-	//			t++;
-	//	}
-	//	if (t == boardSize)
-	//		tmp -= 20;
-	//	t = 0;
-	//}
-
-	float a = tmp * C;
-	a = a / divR;
-	a = a / divB;
+	// This gets the heuristic value and then divides by two numbers
+	a = tmp * C;
+	a = a / divR; // # of red rows completed
+	a = a / divB; // # of blue rows completed
 
 	return a;
 }
@@ -861,27 +659,6 @@ void ForeAft::getBoardId(node *n) {
 
 // Returns if the solution has been found
 bool ForeAft::solutionFound(node *n) {
-	/*for (int i = 0; i < boardSize; i++)
-	{
-		for (int j = 0; j < boardSize; j++)
-		{
-			if (i == boardSize / 2 && j == boardSize / 2) {
-				if (n->arr[i][j] != blank)
-					return false;
-			}
-			else if ((i / (boardSize / 2 + 1)) == 0 && (j / (boardSize / 2 + 1)) == 0) {
-				if (n->arr[i][j] != blue)
-					return false;
-			}
-			else if ((i / (boardSize / 2)) >= 1 && (j / (boardSize / 2)) >= 1)
-					if (n->arr[i][j] != red)
-						return false;
-		}
-	}
-
-	return true;
-	*/
-
 	if (n->num == solution)
 		return true;
 

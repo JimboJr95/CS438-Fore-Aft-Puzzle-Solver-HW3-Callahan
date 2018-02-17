@@ -2,7 +2,7 @@
 // Author:		James Callahan
 // Class:		CS438 (Artificial Intelligence)
 // File:		Heap.cpp
-// Due Date:	15 February 2018
+// Due Date:	22 February 2018
 //
 
 #include "stdafx.h"
@@ -11,6 +11,7 @@
 
 using namespace std;
 
+// Constructor
 Heap::Heap()
 {
 	count = 0;
@@ -26,6 +27,7 @@ Heap::Heap()
 	}
 }
 
+// Destructor
 Heap::~Heap()
 {
 	for (int i = 0; i < count; i++)
@@ -38,29 +40,13 @@ Heap::~Heap()
 	delete[]popped;
 }
 
+// Sorts the heap
 void Heap::sort() {
 	heapsort();
 }
 
+// Adds a new node to the heap
 void Heap::add(node *n) {
-	// If the heap is full, expand the array
-	//if (count+1 > heapSize) {
-	//	heapSize += 50000;
-	//	node **newH = new node*[heapSize];
-	//	node **tmp;
-	//	
-
-	//	for (int i = 0; i < count; i++)
-	//		newH[i] = h[i];
-
-	//	tmp = h;
-	//	h = newH;
-	//	delete []tmp; // need to make sure this doesn't eliminate data
-	//}
-
-	//h[count] = n;
-	//count++;
-
 	if (count+1 > heapSize)
 	{
 		count = heapSize / 2;
@@ -76,10 +62,9 @@ void Heap::add(node *n) {
 
 	h[count] = n;
 	count++;
-
-	//sort();
 }
 
+// Pops the front of the heap and puts it in the popped array
 node * Heap::popFront() {
 	node *tmp = h[0];
 	h[0] = h[count - 1];
@@ -94,7 +79,8 @@ node * Heap::popFront() {
 	return tmp;
 }
 
-// possible prob here?
+
+// The next three functions make up the actual heap sort
 void Heap::buildMaxHeap() {
 	for (int i = count / 2 - 1; i >= 0; i--)
 		heapify(i);
@@ -128,12 +114,6 @@ void Heap::heapify(int i) {
 	}
 }
 
-//void Heap::swap(node *a, node *b) {
-//	node *tmp = a;
-//	a = b;
-//	b = tmp;
-//}
-
 // Is the heap empty
 bool Heap::isEmpty() {
 	if (count <= 0)
@@ -142,12 +122,14 @@ bool Heap::isEmpty() {
 	return false;
 }
 
+// Returns the front node of the heap
 node * Heap::getFront() {
 	return h[0];
 }
 
+// Returns total number of nodes viewed
 int Heap::getSize() {
-	return count;
+	return count + poppedNum;
 }
 
 // Finds parent for heap
@@ -165,16 +147,7 @@ int Heap::right(int i) {
 	return 2 * i + 2;
 }
 
-//bool Heap::alreadyAdded(node *n) {
-//	for (int i = 0; i < count; i++)
-//	{
-//		if (h[i]->id == n->id)
-//			return true;
-//	}
-//
-//	return false;
-//}
-
+// This function expands the array that holds the popped nodes
 void Heap::expandPopped() {
 	poppedSize += 10000;
 	node **tmp = new node*[poppedSize];
