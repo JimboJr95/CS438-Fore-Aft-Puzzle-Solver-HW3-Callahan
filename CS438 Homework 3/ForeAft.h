@@ -16,6 +16,7 @@
 #include <list>
 
 // directions is a typedef integer that tells the function makeMove which direction to move the blank spot
+// algorithm is a typdef int telling which algorithm to use for the makeMove function
 typedef int direction;
 typedef int algorithm;
 
@@ -39,7 +40,7 @@ private:
 	node *root, *current;
 	long solution;
 	int boardSize, nodesVisited, expRowBlue, expRowRed, expColBlue, expColRed;
-	int C = 10; // C value is constant for heuristic
+	int C = 3; // C value is constant for heuristic
 	Heap *open;
 	time_t timer;
 	set<long> found;

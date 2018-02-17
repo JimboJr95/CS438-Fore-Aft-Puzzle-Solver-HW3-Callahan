@@ -60,13 +60,13 @@ void ForeAft::run() {
 		try{
 			inputI = stoi(inputS);
 		}catch (exception e) {
-			cout << "Please select a value from 1 to 2\n\n";
+			cout << "Please select a value from 1 to 4\n\n";
 			goto begin;
 		}
 
 		if (!validNumber(inputI, 1, 4))
 		{
-			cout << "Please enter a valid number from 1 to 2\n";
+			cout << "Please enter a valid number from 1 to 4\n";
 			goto begin;
 		}
 
@@ -309,58 +309,6 @@ void ForeAft::DFS() {
 	closedList.clear();
 }
 
-// Outputs the final solution to the console
-void ForeAft::printSolutionToScreen() {
-	while (current != NULL)
-	{
-		printBoard(current);
-		std::cout << endl;
-		current = current->parent;
-	}
-	std::cout << endl << "number of nodes created: " << open->getSize() + found.size() << endl;
-}
-
-// Outputs the final solution to a file given an output file stream and filename
-void ForeAft::printSolutionToFile(ofstream &outfile, string filename) {
-	outfile.open(filename);
-	list<node*> list;
-	node *n;
-
-	while (current != NULL)
-	{
-		list.emplace_front(current);
-		current = current->parent;
-	}
-
-	while (!list.empty())
-	{
-		n = list.front();
-
-		for (int i = 0; i < boardSize; i++)
-		{
-			for (int j = 0; j < boardSize; j++)
-			{
-
-				if (n->arr[i][j] == invalid)
-					outfile << "# ";
-				else if (n->arr[i][j] == blank)
-					outfile << "  ";
-				else if (n->arr[i][j] == red)
-					outfile << "R ";
-				else
-					outfile << "B ";
-			}
-			outfile << endl;
-		}
-		outfile << endl;
-		list.pop_front();
-	}
-
-	cout << endl << "number of nodes created: " << open->getSize() + found.size() << endl;
-
-	outfile.close();
-}
-
 // This function takes a direction (typedef int, ForeAft.h) and depending on the direction passed in will try to make that move.
 // Possible directions are listed in the ForeAft.h file (ex: UP, DOWN, etc.)
 // It returns true if the solution has been found
@@ -511,7 +459,6 @@ int ForeAft::manhattanDistance(int row1, int row2, int col1, int col2) {
 
 
 /////// Functions for making moves in node 2d array ///////
-
 bool ForeAft::moveBlankUpOne(node *n) {
 	if (n->blankR - 1 >= 0 && n->arr[n->blankR - 1][n->blankC] != invalid)
 	{
@@ -648,6 +595,65 @@ void ForeAft::printBoard(node *n) {
 	}
 }
 
+// Outputs the final solution to the console
+void ForeAft::printSolutionToScreen() {
+	while (current != NULL)
+	{
+		printBoard(current);
+		std::cout << endl;
+		current = current->parent;
+	}
+	std::cout << endl << "number of nodes created: " << open->getSize() + found.size() << endl;
+}
+
+// Outputs the final solution to a file given an output file stream and filename
+void ForeAft::printSolutionToFile(ofstream &outfile, string filename) {
+	// If the solution was found
+	if (solutionFound(current)) {
+		outfile.open(filename);
+		list<node*> list;
+		node *n;
+		int count = 0;
+
+		while (current != NULL)
+		{
+			list.emplace_front(current);
+			current = current->parent;
+		}
+
+		while (!list.empty())
+		{
+			n = list.front();
+			outfile << to_string(count) << ":\n";
+
+			for (int i = 0; i < boardSize; i++)
+			{
+				for (int j = 0; j < boardSize; j++)
+				{
+
+					if (n->arr[i][j] == invalid)
+						outfile << "#";
+					else if (n->arr[i][j] == blank)
+						outfile << " ";
+					else if (n->arr[i][j] == red)
+						outfile << "R";
+					else
+						outfile << "B";
+				}
+				outfile << endl;
+			}
+			outfile << endl << endl;
+			list.pop_front();
+			count++;
+		}
+		cout << "\nHeuristic search has a found a solution with " << to_string(count) << " steps.";
+		cout << "\nSee " << filename << " for details.";
+		cout << endl << "Total of " << open->getSize() + found.size() << " nodes generated.\n\n";
+
+		outfile.close();
+	}
+}
+
 void ForeAft::getBoardId(node *n) {
 	// If the id hasn't been created yet
 	if (n->id == "") {
@@ -665,7 +671,6 @@ bool ForeAft::solutionFound(node *n) {
 	return false;
 }
 
-
 // Starts timer
 void ForeAft::startTimer()
 {
@@ -678,10 +683,10 @@ void ForeAft::endTimer()
 	timer = clock() - timer;
 
 	// Clock source: http://www.cplusplus.com/reference/ctime/clock/
-	std::cout << "Time (s) to make calculations: " << ((float)timer) / CLOCKS_PER_SEC << endl;
+	std::cout << "Time (s) to make calculations: " << ((float)timer) / CLOCKS_PER_SEC << endl << endl;
 }
 
-// From Dr. Yu's 8-Puzzle program, for determining duplicate graphs
+// From Dr. Yu's 8-Puzzle program, for determining duplicate boards
 long ForeAft::getNum(node* n)
 {
 	long num = 0;

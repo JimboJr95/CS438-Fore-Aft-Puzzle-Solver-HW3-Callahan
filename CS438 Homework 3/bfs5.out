@@ -1,402 +1,536 @@
-R R R # # 
-R R R # # 
-R R   B B 
-# # B B B 
-# # B B B 
-
-R R R # # 
-R R   # # 
-R R R B B 
-# # B B B 
-# # B B B 
-
-R R R # # 
-R R B # # 
-R R R B B 
-# #   B B 
-# # B B B 
-
-R R R # # 
-R R B # # 
-R R R B B 
-# # B B B 
-# #   B B 
-
-R R R # # 
-R R B # # 
-R R   B B 
-# # B B B 
-# # R B B 
-
-R R   # # 
-R R B # # 
-R R R B B 
-# # B B B 
-# # R B B 
-
-R R B # # 
-R R   # # 
-R R R B B 
-# # B B B 
-# # R B B 
-
-R R B # # 
-R R B # # 
-R R R B B 
-# #   B B 
-# # R B B 
-
-R R B # # 
-R R B # # 
-R R R B B 
-# # B   B 
-# # R B B 
-
-R R B # # 
-R R B # # 
-R R R   B 
-# # B B B 
-# # R B B 
-
-R R B # # 
-R R B # # 
-R R   R B 
-# # B B B 
-# # R B B 
-
-R R B # # 
-R R B # # 
-R   R R B 
-# # B B B 
-# # R B B 
-
-R R B # # 
-R   B # # 
-R R R R B 
-# # B B B 
-# # R B B 
-
-R R B # # 
-R B   # # 
-R R R R B 
-# # B B B 
-# # R B B 
-
-R R B # # 
-R B B # # 
-R R R R B 
-# #   B B 
-# # R B B 
-
-R R B # # 
-R B B # # 
-R R R R B 
-# # B   B 
-# # R B B 
-
-R R B # # 
-R B B # # 
-R R R R B 
-# # B B B 
-# # R   B 
-
-R R B # # 
-R B B # # 
-R R R   B 
-# # B B B 
-# # R R B 
-
-R R B # # 
-R B B # # 
-R R   R B 
-# # B B B 
-# # R R B 
-
-R R B # # 
-R B B # # 
-R   R R B 
-# # B B B 
-# # R R B 
-
-R   B # # 
-R B B # # 
-R R R R B 
-# # B B B 
-# # R R B 
-
-R B B # # 
-R   B # # 
-R R R R B 
-# # B B B 
-# # R R B 
-
-R B B # # 
-R B   # # 
-R R R R B 
-# # B B B 
-# # R R B 
-
-R B B # # 
-R B B # # 
-R R R R B 
-# #   B B 
-# # R R B 
-
-R B B # # 
-R B B # # 
-R R R R B 
-# # B   B 
-# # R R B 
-
-R B B # # 
-R B B # # 
-R R R R B 
-# # B B   
-# # R R B 
-
-R B B # # 
-R B B # # 
-R R R R   
-# # B B B 
-# # R R B 
-
-R B B # # 
-R B B # # 
-R R R   R 
-# # B B B 
-# # R R B 
-
-R B B # # 
-R B B # # 
-R R   R R 
-# # B B B 
-# # R R B 
-
-R B B # # 
-R B B # # 
-R   R R R 
-# # B B B 
-# # R R B 
-
-R B B # # 
-R B B # # 
-  R R R R 
-# # B B B 
-# # R R B 
-
-R B B # # 
-  B B # # 
-R R R R R 
-# # B B B 
-# # R R B 
-
-R B B # # 
-B   B # # 
-R R R R R 
-# # B B B 
-# # R R B 
-
-R B B # # 
-B B   # # 
-R R R R R 
-# # B B B 
-# # R R B 
-
-R B B # # 
-B B B # # 
-R R R R R 
-# #   B B 
-# # R R B 
-
-R B B # # 
-B B B # # 
-R R R R R 
-# # B   B 
-# # R R B 
-
-R B B # # 
-B B B # # 
-R R R R R 
-# # B B   
-# # R R B 
-
-R B B # # 
-B B B # # 
-R R R R R 
-# # B B B 
-# # R R   
-
-R B B # # 
-B B B # # 
-R R R R   
-# # B B B 
-# # R R R 
-
-R B B # # 
-B B B # # 
-R R R   R 
-# # B B B 
-# # R R R 
-
-R B B # # 
-B B B # # 
-R R   R R 
-# # B B B 
-# # R R R 
-
-R B B # # 
-B B B # # 
-R   R R R 
-# # B B B 
-# # R R R 
-
-R B B # # 
-B B B # # 
-  R R R R 
-# # B B B 
-# # R R R 
-
-  B B # # 
-B B B # # 
-R R R R R 
-# # B B B 
-# # R R R 
-
-B B B # # 
-  B B # # 
-R R R R R 
-# # B B B 
-# # R R R 
-
-B B B # # 
-B   B # # 
-R R R R R 
-# # B B B 
-# # R R R 
-
-B B B # # 
-B B   # # 
-R R R R R 
-# # B B B 
-# # R R R 
-
-B B B # # 
-B B B # # 
-R R R R R 
-# #   B B 
-# # R R R 
-
-B B B # # 
-B B B # # 
-R R R R R 
-# # B   B 
-# # R R R 
-
-B B B # # 
-B B B # # 
-R R R R R 
-# # B B   
-# # R R R 
-
-B B B # # 
-B B B # # 
-R R R R   
-# # B B R 
-# # R R R 
-
-B B B # # 
-B B B # # 
-R R R   R 
-# # B B R 
-# # R R R 
-
-B B B # # 
-B B B # # 
-R R   R R 
-# # B B R 
-# # R R R 
-
-B B B # # 
-B B B # # 
-R   R R R 
-# # B B R 
-# # R R R 
-
-B B B # # 
-B B B # # 
-  R R R R 
-# # B B R 
-# # R R R 
-
-B B B # # 
-  B B # # 
-B R R R R 
-# # B B R 
-# # R R R 
-
-B B B # # 
-B   B # # 
-B R R R R 
-# # B B R 
-# # R R R 
-
-B B B # # 
-B B   # # 
-B R R R R 
-# # B B R 
-# # R R R 
-
-B B B # # 
-B B B # # 
-B R R R R 
-# #   B R 
-# # R R R 
-
-B B B # # 
-B B B # # 
-B R R R R 
-# # B   R 
-# # R R R 
-
-B B B # # 
-B B B # # 
-B R R   R 
-# # B R R 
-# # R R R 
-
-B B B # # 
-B B B # # 
-B R   R R 
-# # B R R 
-# # R R R 
-
-B B B # # 
-B B B # # 
-B   R R R 
-# # B R R 
-# # R R R 
-
-B B B # # 
-B   B # # 
-B B R R R 
-# # B R R 
-# # R R R 
-
-B B B # # 
-B B   # # 
-B B R R R 
-# # B R R 
-# # R R R 
-
-B B B # # 
-B B B # # 
-B B R R R 
-# #   R R 
-# # R R R 
-
-B B B # # 
-B B B # # 
-B B   R R 
-# # R R R 
-# # R R R 
+0:
+RRR##
+RRR##
+RR BB
+##BBB
+##BBB
+
+
+1:
+RRR##
+RR ##
+RRRBB
+##BBB
+##BBB
+
+
+2:
+RRR##
+RRB##
+RRRBB
+## BB
+##BBB
+
+
+3:
+RRR##
+RRB##
+RRRBB
+##BBB
+## BB
+
+
+4:
+RRR##
+RRB##
+RR BB
+##BBB
+##RBB
+
+
+5:
+RR ##
+RRB##
+RRRBB
+##BBB
+##RBB
+
+
+6:
+RRB##
+RR ##
+RRRBB
+##BBB
+##RBB
+
+
+7:
+RRB##
+RRB##
+RRRBB
+## BB
+##RBB
+
+
+8:
+RRB##
+RRB##
+RRRBB
+##B B
+##RBB
+
+
+9:
+RRB##
+RRB##
+RRR B
+##BBB
+##RBB
+
+
+10:
+RRB##
+RRB##
+RR RB
+##BBB
+##RBB
+
+
+11:
+RRB##
+RRB##
+R RRB
+##BBB
+##RBB
+
+
+12:
+RRB##
+R B##
+RRRRB
+##BBB
+##RBB
+
+
+13:
+RRB##
+RB ##
+RRRRB
+##BBB
+##RBB
+
+
+14:
+RRB##
+RBB##
+RRRRB
+## BB
+##RBB
+
+
+15:
+RRB##
+RBB##
+RRRRB
+##B B
+##RBB
+
+
+16:
+RRB##
+RBB##
+RRRRB
+##BBB
+##R B
+
+
+17:
+RRB##
+RBB##
+RRR B
+##BBB
+##RRB
+
+
+18:
+RRB##
+RBB##
+RR RB
+##BBB
+##RRB
+
+
+19:
+RRB##
+RBB##
+R RRB
+##BBB
+##RRB
+
+
+20:
+R B##
+RBB##
+RRRRB
+##BBB
+##RRB
+
+
+21:
+RBB##
+R B##
+RRRRB
+##BBB
+##RRB
+
+
+22:
+RBB##
+RB ##
+RRRRB
+##BBB
+##RRB
+
+
+23:
+RBB##
+RBB##
+RRRRB
+## BB
+##RRB
+
+
+24:
+RBB##
+RBB##
+RRRRB
+##B B
+##RRB
+
+
+25:
+RBB##
+RBB##
+RRRRB
+##BB 
+##RRB
+
+
+26:
+RBB##
+RBB##
+RRRR 
+##BBB
+##RRB
+
+
+27:
+RBB##
+RBB##
+RRR R
+##BBB
+##RRB
+
+
+28:
+RBB##
+RBB##
+RR RR
+##BBB
+##RRB
+
+
+29:
+RBB##
+RBB##
+R RRR
+##BBB
+##RRB
+
+
+30:
+RBB##
+RBB##
+ RRRR
+##BBB
+##RRB
+
+
+31:
+RBB##
+ BB##
+RRRRR
+##BBB
+##RRB
+
+
+32:
+RBB##
+B B##
+RRRRR
+##BBB
+##RRB
+
+
+33:
+RBB##
+BB ##
+RRRRR
+##BBB
+##RRB
+
+
+34:
+RBB##
+BBB##
+RRRRR
+## BB
+##RRB
+
+
+35:
+RBB##
+BBB##
+RRRRR
+##B B
+##RRB
+
+
+36:
+RBB##
+BBB##
+RRRRR
+##BB 
+##RRB
+
+
+37:
+RBB##
+BBB##
+RRRRR
+##BBB
+##RR 
+
+
+38:
+RBB##
+BBB##
+RRRR 
+##BBB
+##RRR
+
+
+39:
+RBB##
+BBB##
+RRR R
+##BBB
+##RRR
+
+
+40:
+RBB##
+BBB##
+RR RR
+##BBB
+##RRR
+
+
+41:
+RBB##
+BBB##
+R RRR
+##BBB
+##RRR
+
+
+42:
+RBB##
+BBB##
+ RRRR
+##BBB
+##RRR
+
+
+43:
+ BB##
+BBB##
+RRRRR
+##BBB
+##RRR
+
+
+44:
+BBB##
+ BB##
+RRRRR
+##BBB
+##RRR
+
+
+45:
+BBB##
+B B##
+RRRRR
+##BBB
+##RRR
+
+
+46:
+BBB##
+BB ##
+RRRRR
+##BBB
+##RRR
+
+
+47:
+BBB##
+BBB##
+RRRRR
+## BB
+##RRR
+
+
+48:
+BBB##
+BBB##
+RRRRR
+##B B
+##RRR
+
+
+49:
+BBB##
+BBB##
+RRRRR
+##BB 
+##RRR
+
+
+50:
+BBB##
+BBB##
+RRRR 
+##BBR
+##RRR
+
+
+51:
+BBB##
+BBB##
+RRR R
+##BBR
+##RRR
+
+
+52:
+BBB##
+BBB##
+RR RR
+##BBR
+##RRR
+
+
+53:
+BBB##
+BBB##
+R RRR
+##BBR
+##RRR
+
+
+54:
+BBB##
+BBB##
+ RRRR
+##BBR
+##RRR
+
+
+55:
+BBB##
+ BB##
+BRRRR
+##BBR
+##RRR
+
+
+56:
+BBB##
+B B##
+BRRRR
+##BBR
+##RRR
+
+
+57:
+BBB##
+BB ##
+BRRRR
+##BBR
+##RRR
+
+
+58:
+BBB##
+BBB##
+BRRRR
+## BR
+##RRR
+
+
+59:
+BBB##
+BBB##
+BRRRR
+##B R
+##RRR
+
+
+60:
+BBB##
+BBB##
+BRR R
+##BRR
+##RRR
+
+
+61:
+BBB##
+BBB##
+BR RR
+##BRR
+##RRR
+
+
+62:
+BBB##
+BBB##
+B RRR
+##BRR
+##RRR
+
+
+63:
+BBB##
+B B##
+BBRRR
+##BRR
+##RRR
+
+
+64:
+BBB##
+BB ##
+BBRRR
+##BRR
+##RRR
+
+
+65:
+BBB##
+BBB##
+BBRRR
+## RR
+##RRR
+
+
+66:
+BBB##
+BBB##
+BB RR
+##RRR
+##RRR
+
 
