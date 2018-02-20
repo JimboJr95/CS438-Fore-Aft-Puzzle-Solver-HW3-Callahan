@@ -31,50 +31,50 @@ RR BB
 
 
 4:
-RRR##
-RRB##
-RRBBB
-##RBB
-## BB
-
-
-5:
-RRR##
-RRB##
-RRBBB
-## BB
-##RBB
-
-
-6:
-RRR##
-RRB##
-RR BB
-##BBB
-##RBB
-
-
-7:
 RR ##
 RRB##
 RRRBB
-##BBB
 ##RBB
+##BBB
+
+
+5:
+RRB##
+RR ##
+RRRBB
+##RBB
+##BBB
+
+
+6:
+RRB##
+RRR##
+RR BB
+##RBB
+##BBB
+
+
+7:
+RRB##
+RRR##
+RRBBB
+##RBB
+## BB
 
 
 8:
 RRB##
-RR ##
-RRRBB
-##BBB
+RRR##
+RRBBB
+## BB
 ##RBB
 
 
 9:
 RRB##
-RRB##
-RRRBB
-## BB
+RR ##
+RRBBB
+##RBB
 ##RBB
 
 
@@ -89,780 +89,540 @@ RR BB
 11:
 RRB##
 RRB##
-RRB B
+R RBB
 ##RBB
 ##RBB
 
 
 12:
 RRB##
+R B##
+RRRBB
+##RBB
+##RBB
+
+
+13:
 RRB##
+RB ##
+RRRBB
+##RBB
+##RBB
+
+
+14:
+RR ##
+RBB##
+RRRBB
+##RBB
+##RBB
+
+
+15:
+R R##
+RBB##
+RRRBB
+##RBB
+##RBB
+
+
+16:
+RBR##
+R B##
+RRRBB
+##RBB
+##RBB
+
+
+17:
+RBR##
+ RB##
+RRRBB
+##RBB
+##RBB
+
+
+18:
+ BR##
+RRB##
+RRRBB
+##RBB
+##RBB
+
+
+19:
+B R##
+RRB##
+RRRBB
+##RBB
+##RBB
+
+
+20:
+BRR##
+R B##
+RRRBB
+##RBB
+##RBB
+
+
+21:
+BRR##
+RB ##
+RRRBB
+##RBB
+##RBB
+
+
+22:
+BRR##
+RBR##
+RR BB
+##RBB
+##RBB
+
+
+23:
+BRR##
+RBR##
+RRB B
+##RBB
+##RBB
+
+
+24:
+BRR##
+RBR##
 RRBBB
 ##RBB
 ##R B
 
 
-13:
-RRB##
-RRB##
+25:
+BRR##
+RBR##
 RRBBB
 ##RBB
 ## RB
 
 
-14:
-RRB##
-RRB##
+26:
+BRR##
+RBR##
 RRBBB
 ## BB
 ##RRB
 
 
-15:
-RRB##
-RRB##
-RR BB
-##BBB
-##RRB
-
-
-16:
-RRB##
-RRB##
-R RBB
-##BBB
-##RRB
-
-
-17:
-RRB##
-R B##
-RRRBB
-##BBB
-##RRB
-
-
-18:
-RRB##
-RB ##
-RRRBB
-##BBB
-##RRB
-
-
-19:
-RRB##
-RBB##
-RRRBB
-## BB
-##RRB
-
-
-20:
-RRB##
-RBB##
-RR BB
-##RBB
-##RRB
-
-
-21:
-RRB##
-RBB##
-R RBB
-##RBB
-##RRB
-
-
-22:
-RRB##
-R B##
-RBRBB
-##RBB
-##RRB
-
-
-23:
-R B##
-RRB##
-RBRBB
-##RBB
-##RRB
-
-
-24:
-RBB##
-RRB##
-R RBB
-##RBB
-##RRB
-
-
-25:
-RBB##
-R B##
-RRRBB
-##RBB
-##RRB
-
-
-26:
-RBB##
- RB##
-RRRBB
-##RBB
-##RRB
-
-
 27:
- BB##
-RRB##
-RRRBB
+BRR##
+RB ##
+RRBBB
 ##RBB
 ##RRB
 
 
 28:
-B B##
-RRB##
-RRRBB
+BRR##
+RBB##
+RR BB
 ##RBB
 ##RRB
 
 
 29:
-BB ##
-RRB##
+BR ##
+RBB##
 RRRBB
 ##RBB
 ##RRB
 
 
 30:
-BBB##
-RR ##
+BRB##
+RB ##
 RRRBB
 ##RBB
 ##RRB
 
 
 31:
-BBB##
-RRR##
+BRB##
+RBR##
 RR BB
 ##RBB
 ##RRB
 
 
 32:
-BBB##
-RRR##
+BRB##
+RBR##
 RRB B
 ##RBB
 ##RRB
 
 
 33:
-BBB##
-RRR##
+BRB##
+RBR##
 RRBBB
 ##R B
 ##RRB
 
 
 34:
-BBB##
-RRR##
+BRB##
+RBR##
 RRBBB
-## RB
+##RB 
 ##RRB
 
 
 35:
-BBB##
-RR ##
+BRB##
+RBR##
 RRBBB
-##RRB
-##RRB
+##RBB
+##RR 
 
 
 36:
-BBB##
-RRB##
-RR BB
-##RRB
-##RRB
+BRB##
+RBR##
+RRBBB
+##RBB
+##R R
 
 
 37:
-BBB##
-RRB##
-R RBB
-##RRB
-##RRB
+BRB##
+RBR##
+RRBBB
+##RBB
+## RR
 
 
 38:
-BBB##
-RRB##
- RRBB
-##RRB
-##RRB
+BRB##
+RBR##
+RRBBB
+## BB
+##RRR
 
 
 39:
-BBB##
- RB##
-RRRBB
-##RRB
-##RRB
+BRB##
+RB ##
+RRBBB
+##RBB
+##RRR
 
 
 40:
- BB##
 BRB##
-RRRBB
-##RRB
-##RRB
+RBB##
+RR BB
+##RBB
+##RRR
 
 
 41:
-B B##
 BRB##
-RRRBB
-##RRB
-##RRB
+RBB##
+R RBB
+##RBB
+##RRR
 
 
 42:
-BB ##
-BRB##
+B B##
+RBB##
 RRRBB
-##RRB
-##RRB
+##RBB
+##RRR
 
 
 43:
 BBB##
-BR ##
+R B##
 RRRBB
-##RRB
-##RRB
+##RBB
+##RRR
 
 
 44:
 BBB##
-BRR##
-RR BB
-##RRB
-##RRB
+ RB##
+RRRBB
+##RBB
+##RRR
 
 
 45:
-BBB##
-BRR##
-RRB B
-##RRB
-##RRB
+ BB##
+BRB##
+RRRBB
+##RBB
+##RRR
 
 
 46:
-BBB##
-BRR##
-RRBRB
-##R B
-##RRB
+B B##
+BRB##
+RRRBB
+##RBB
+##RRR
 
 
 47:
-BBB##
-BRR##
-RRBRB
-## RB
-##RRB
+BB ##
+BRB##
+RRRBB
+##RBB
+##RRR
 
 
 48:
 BBB##
 BR ##
-RRBRB
-##RRB
-##RRB
+RRRBB
+##RBB
+##RRR
 
 
 49:
 BBB##
-BRB##
-RR RB
-##RRB
-##RRB
+BRR##
+RR BB
+##RBB
+##RRR
 
 
 50:
 BBB##
-BRB##
-R RRB
-##RRB
-##RRB
+BRR##
+RRB B
+##RBB
+##RRR
 
 
 51:
 BBB##
-B B##
-RRRRB
-##RRB
-##RRB
+BRR##
+RRBBB
+##R B
+##RRR
 
 
 52:
 BBB##
-BB ##
-RRRRB
-##RRB
-##RRB
+BRR##
+RRBBB
+## RB
+##RRR
 
 
 53:
 BBB##
-BBR##
-RR RB
+BR ##
+RRBBB
 ##RRB
-##RRB
+##RRR
 
 
 54:
 BBB##
-BBR##
-RRRRB
+BRB##
+RR BB
 ##RRB
-## RB
+##RRR
 
 
 55:
 BBB##
-BBR##
-RRRRB
+BRB##
+RRB B
 ##RRB
-##R B
+##RRR
 
 
 56:
 BBB##
-BBR##
-RRRRB
+BRB##
+RRBB 
 ##RRB
-##RB 
+##RRR
 
 
 57:
 BBB##
-BBR##
-RRRRB
+BRB##
+RRBBB
 ##RR 
-##RBB
+##RRR
 
 
 58:
 BBB##
-BBR##
-RRRRB
+BRB##
+RRBBB
 ##R R
-##RBB
+##RRR
 
 
 59:
 BBB##
-BBR##
-RRRRB
+BRB##
+RRBBB
 ## RR
-##RBB
+##RRR
 
 
 60:
 BBB##
-BB ##
-RRRRB
+BRB##
+RR BB
+##BRR
 ##RRR
-##RBB
 
 
 61:
 BBB##
-B B##
-RRRRB
+BRB##
+R RBB
+##BRR
 ##RRR
-##RBB
 
 
 62:
-B B##
 BBB##
-RRRRB
+B B##
+RRRBB
+##BRR
 ##RRR
-##RBB
 
 
 63:
-BRB##
 BBB##
-R RRB
+BB ##
+RRRBB
+##BRR
 ##RRR
-##RBB
 
 
 64:
-BRB##
 BBB##
- RRRB
+BBB##
+RRRBB
+## RR
 ##RRR
-##RBB
 
 
 65:
- RB##
 BBB##
-BRRRB
+BBB##
+RR BB
 ##RRR
-##RBB
+##RRR
 
 
 66:
-R B##
 BBB##
-BRRRB
+BBB##
+R RBB
 ##RRR
-##RBB
+##RRR
 
 
 67:
-RB ##
 BBB##
-BRRRB
+BBB##
+ RRBB
 ##RRR
-##RBB
+##RRR
 
 
 68:
-RBR##
 BBB##
-BR RB
+ BB##
+BRRBB
 ##RRR
-##RBB
+##RRR
 
 
 69:
-RBR##
-BB ##
-BRBRB
+BBB##
+B B##
+BRRBB
 ##RRR
-##RBB
+##RRR
 
 
 70:
-RB ##
-BBR##
-BRBRB
+BBB##
+BB ##
+BRRBB
 ##RRR
-##RBB
+##RRR
 
 
 71:
-RBB##
+BBB##
 BBR##
-BR RB
+BR BB
 ##RRR
-##RBB
+##RRR
 
 
 72:
-RBB##
+BBB##
 BBR##
-BRRRB
+BRB B
 ##RRR
-## BB
+##RRR
 
 
 73:
-RBB##
+BBB##
 BBR##
-BRRRB
+BRBRB
+##R R
 ##RRR
-##B B
 
 
 74:
-RBB##
+BBB##
 BBR##
-BRRRB
+BRBRB
+## RR
 ##RRR
-##BB 
 
 
 75:
-RBB##
-BBR##
-BRRRB
-##RR 
-##BBR
+BBB##
+BB ##
+BRBRB
+##RRR
+##RRR
 
 
 76:
-RBB##
-BBR##
-BRRRB
-##R R
-##BBR
+BBB##
+BBB##
+BR RB
+##RRR
+##RRR
 
 
 77:
-RBB##
-BBR##
+BBB##
+BBB##
 BRR B
 ##RRR
-##BBR
+##RRR
 
 
 78:
-RBB##
-BBR##
-BR RB
-##RRR
-##BBR
-
-
-79:
-RBB##
-BBR##
-BRBRB
-##RRR
-## BR
-
-
-80:
-RBB##
-BBR##
-BRBRB
-## RR
-##RBR
-
-
-81:
-RBB##
-BB ##
-BRBRB
-##RRR
-##RBR
-
-
-82:
-RBB##
-BBB##
-BR RB
-##RRR
-##RBR
-
-
-83:
-RBB##
-BBB##
-B RRB
-##RRR
-##RBR
-
-
-84:
-RBB##
-B B##
-BBRRB
-##RRR
-##RBR
-
-
-85:
-RBB##
- BB##
-BBRRB
-##RRR
-##RBR
-
-
-86:
- BB##
-RBB##
-BBRRB
-##RRR
-##RBR
-
-
-87:
-B B##
-RBB##
-BBRRB
-##RRR
-##RBR
-
-
-88:
-BBB##
-R B##
-BBRRB
-##RRR
-##RBR
-
-
-89:
-BBB##
-RB ##
-BBRRB
-##RRR
-##RBR
-
-
-90:
-BBB##
-RBR##
-BB RB
-##RRR
-##RBR
-
-
-91:
-BBB##
-RBR##
-BBRRB
-##RRR
-## BR
-
-
-92:
-BBB##
-RBR##
-BBRRB
-##RRR
-##B R
-
-
-93:
-BBB##
-RBR##
-BBRRB
-##R R
-##BRR
-
-
-94:
-BBB##
-RBR##
-BBRRB
-## RR
-##BRR
-
-
-95:
-BBB##
-RBR##
-BBRRB
-##BRR
-## RR
-
-
-96:
-BBB##
-RBR##
-BB RB
-##BRR
-##RRR
-
-
-97:
-BBB##
-RBR##
-BBBRB
-## RR
-##RRR
-
-
-98:
-BBB##
-RB ##
-BBBRB
-##RRR
-##RRR
-
-
-99:
-BBB##
-R B##
-BBBRB
-##RRR
-##RRR
-
-
-100:
-BBB##
- RB##
-BBBRB
-##RRR
-##RRR
-
-
-101:
-BBB##
-BRB##
- BBRB
-##RRR
-##RRR
-
-
-102:
-BBB##
-BRB##
-B BRB
-##RRR
-##RRR
-
-
-103:
-BBB##
-B B##
-BRBRB
-##RRR
-##RRR
-
-
-104:
-B B##
-BBB##
-BRBRB
-##RRR
-##RRR
-
-
-105:
-BB ##
-BBB##
-BRBRB
-##RRR
-##RRR
-
-
-106:
-BBB##
-BBB##
-BR RB
-##RRR
-##RRR
-
-
-107:
-BBB##
-BBB##
-BRR B
-##RRR
-##RRR
-
-
-108:
 BBB##
 BBB##
 BRRB 
@@ -870,31 +630,31 @@ BRRB
 ##RRR
 
 
-109:
+79:
 BBB##
 BBB##
 BRRBR
-##RRR
 ##RR 
+##RRR
 
 
-110:
+80:
 BBB##
 BBB##
 BRRBR
-##RRR
 ##R R
+##RRR
 
 
-111:
+81:
 BBB##
 BBB##
 BRRBR
-##RRR
 ## RR
+##RRR
 
 
-112:
+82:
 BBB##
 BBB##
 BR BR
@@ -902,7 +662,7 @@ BR BR
 ##RRR
 
 
-113:
+83:
 BBB##
 BBB##
 B RBR
@@ -910,7 +670,7 @@ B RBR
 ##RRR
 
 
-114:
+84:
 BBB##
 B B##
 BBRBR
@@ -918,7 +678,7 @@ BBRBR
 ##RRR
 
 
-115:
+85:
 BBB##
 BB ##
 BBRBR
@@ -926,7 +686,7 @@ BBRBR
 ##RRR
 
 
-116:
+86:
 BBB##
 BBR##
 BB BR
@@ -934,7 +694,7 @@ BB BR
 ##RRR
 
 
-117:
+87:
 BBB##
 BBR##
 BBB R
@@ -942,7 +702,7 @@ BBB R
 ##RRR
 
 
-118:
+88:
 BBB##
 BBR##
 BBBRR
@@ -950,7 +710,7 @@ BBBRR
 ##RRR
 
 
-119:
+89:
 BBB##
 BBR##
 BBBRR
@@ -958,7 +718,7 @@ BBBRR
 ##RRR
 
 
-120:
+90:
 BBB##
 BB ##
 BBBRR
@@ -966,7 +726,7 @@ BBBRR
 ##RRR
 
 
-121:
+91:
 BBB##
 BBB##
 BB RR

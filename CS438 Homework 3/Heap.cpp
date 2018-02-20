@@ -92,7 +92,7 @@ void Heap::heapsort() {
 	for (int i = count - 1; i >= 0; i--)
 	{
 		swap(h[0], h[i]);
-		heapify(0);
+		heapify(i);
 	}
 }
 
